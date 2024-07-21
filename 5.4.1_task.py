@@ -1,9 +1,6 @@
-import time
-
 import requests
-import get_category_541
-category_list = ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
-
+from get_category_541 import get_categories
+category_list = get_categories()
 class TestCreateRandomJokeCategory():
     """Класс для отправке запросов с целью получения шуток с Чаком Норрисом по заданной категории"""
     url = 'https://api.chucknorris.io/jokes/random'
@@ -34,7 +31,6 @@ class TestCreateRandomJokeCategory():
 
             print("Тест прошел успешно")
             print('\n')
-            time.sleep(3)
 
 
 test = TestCreateRandomJokeCategory()
