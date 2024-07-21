@@ -1,6 +1,9 @@
 import requests
+#получаем список категорий через функцию в файле get_category_541
 from get_category_541 import get_categories
+#присваиваем глобальной переменной список категорий, который вернул get_category_541
 category_list = get_categories()
+
 class TestCreateRandomJokeCategory():
     """Класс для отправке запросов с целью получения шуток с Чаком Норрисом по заданной категории"""
     url = 'https://api.chucknorris.io/jokes/random'
@@ -24,7 +27,7 @@ class TestCreateRandomJokeCategory():
             print(joke_value)
 
             joke_category = check_joke.get("categories")
-            print(joke_category)
+            print('Категория шутки: ', joke_category)
             #в поле joke_category у joke только один индекст, у category_list - много
             assert joke_category[0] == category_list[i], 'ОШИБКА, Статус-код не совпадает'
             print('Категория корректна')
