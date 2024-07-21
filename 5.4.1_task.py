@@ -1,34 +1,17 @@
-import requests
-result_categories_list = []
+import time
 
-class GetCategories():
-    """Получаем список категорий"""
-    def __init__(self):
-        pass
-    def get_categories(self):
-        url_categories = 'https://api.chucknorris.io/jokes/categories'
-        categories = requests.get(url_categories)
-        result_categories = requests.get(url_categories)
-        result_categories_list.append(result_categories.json())
-        print(url_categories)
-        print(result_categories.json())
-        print('\n')
-        # print(type(result_categories.json()))
+import requests
+import get_category_541
+category_list = ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money', 'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
 
 class TestCreateRandomJokeCategory():
     """Класс для отправке запросов с целью получения шуток с Чаком Норрисом по заданной категории"""
-
     url = 'https://api.chucknorris.io/jokes/random'
 
-    def test_create_random_joke(self, expected_status_code):
-        """Отправка запроса, проверка на соответствие категории, проверка на содержание имени Chuck в теле шутки, печать шутки."""
-
-        # Цикл для итерации по списку категорий
-        for i in range(len(result_categories_list)):
-            category = result_categories_list[i]
-            print(category[i])
-
-            path_joke_category = "?category=" + category[i]
+    def test_create_random_joke(self, categories, expected_status_code):
+        """Отправка запроса, проверка на соответствие категории, печать шутки."""
+        for i in range(len(category_list)):
+            path_joke_category = "?category=" + categories[i]
             url_joke_category = self.url + path_joke_category
             print(url_joke_category)
 
@@ -45,13 +28,14 @@ class TestCreateRandomJokeCategory():
 
             joke_category = check_joke.get("categories")
             print(joke_category)
-            assert joke_category[i] == category[i], 'ОШИБКА, Статус-код не совпадает'
+            #в поле joke_category у joke только один индекст, у category_list - много
+            assert joke_category[0] == category_list[i], 'ОШИБКА, Статус-код не совпадает'
             print('Категория корректна')
 
             print("Тест прошел успешно")
             print('\n')
+            time.sleep(3)
 
-test_1 = GetCategories()
-test_1.get_categories()
-test_2 = TestCreateRandomJokeCategory()
-test_2.test_create_random_joke(200)
+
+test = TestCreateRandomJokeCategory()
+test.test_create_random_joke(category_list, 200)
