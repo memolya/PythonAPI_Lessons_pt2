@@ -1,5 +1,4 @@
 import requests
-location_id_in_txt = []
 
 class Test_new_location():
     """Работа с новой локацией - создание, изменение, удаление, информация"""
