@@ -78,7 +78,7 @@ class Test_new_location():
         get_resource = '/maps/api/place/get/json'  # ресурс для метода get
         place_id_key = '&place_id='  # добавляем к ключу place id
 
-        with open('places_590.txt', 'r') as file:                   #открываем файл для чтения
+        with (open('places_590.txt', 'r') as file):                   #открываем файл для чтения
             for line in file:                                       #перебираем файл построчно
                 line_checked = line.rstrip()                        #удаляем символы переноса строк
                 get_url = self.base_url + get_resource + self.key + place_id_key + line_checked # + line_checked = place_id (из цикла по файлу)
@@ -87,15 +87,10 @@ class Test_new_location():
                 result_get = requests.get(get_url)
                 print(result_get.text)  # выдаем результат запроса get
 
-                assert 200 == result_get.status_code
-                if result_get.status_code == 200:
-                    print('Статус код: ' + str(result_get.status_code))
-                    print('Успешно: ID локации в файле places_590 валиден.')
-                    print('\n') #разделение тестов
-
-                else:
-                    print('Провал: запрос ошибочный.')
-                    print('\n')  # разделение тестов
+                assert 200 == result_get.status_code, 'Провал: запрос ошибочный.'
+                print('Успешно: ID локации в файле places_590 валиден.')
+                print('Статус код: ' + str(result_get.status_code))
+                print('\n') #разделение тестов
 
 #создание мест и получение place_id с проверками кодов
 test_1 = Test_new_location()
