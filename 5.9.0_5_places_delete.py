@@ -116,7 +116,7 @@ class Test_new_location():
                         check_status = result_delete.json()  # получать ответ в json формате и значения определенных полей из него
                         check_info_status = check_status.get('status')
                         print('Сообщение: ' + str(check_info_status))
-                        assert check_info_status == 'OK'
+                        assert check_info_status == 'OK', 'Ошибка: сообщение не верно.'
                         print('Сообщение верно.\n')
 
                         """Проверка удаления новой локации"""
