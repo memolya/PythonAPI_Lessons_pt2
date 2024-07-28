@@ -107,11 +107,8 @@ class Test_new_location():
                         print(result_delete.text)
                         print('Статус код: ' + str(result_delete.status_code))
 
-                        assert 200 == result_delete.status_code
-                        if result_delete.status_code == 200:
-                            print('Успешно: удаление новой локации прошло успешно.')
-                        else:
-                            print('Провал: запрос ошибочный.')
+                        assert 200 == result_delete.status_code, 'Провал: запрос ошибочный.'
+                        print('Успешно: удаление новой локации прошло успешно.')
 
                         check_status = result_delete.json()  # получать ответ в json формате и значения определенных полей из него
                         check_info_status = check_status.get('status')
